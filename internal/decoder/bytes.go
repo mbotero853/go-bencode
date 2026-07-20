@@ -20,7 +20,7 @@ func (d *Decoder) decodeBytes() ([]byte, error) {
 	}
 	index += 1
 	endIndex := index + int(stringLength)
-	if endIndex > d.length {
+	if endIndex > d.length || endIndex < 0 {
 		return nil, errors.New("bencode: not a valid bencoded string")
 	}
 	value := d.data[index:endIndex]

@@ -19,6 +19,9 @@ func (d *Decoder) Decode(data []byte) (interface{}, error) {
 }
 
 func (d *Decoder) decode() (interface{}, error) {
+	if d.cursor == d.length {
+		return nil, errors.New("bencode: out of bounds")
+	}
 	switch d.data[d.cursor] {
 	case 'i':
 		return d.decodeInt()

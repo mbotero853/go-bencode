@@ -15,6 +15,9 @@ var (
 )
 
 func (d *Decoder) parseInt(data []byte) (int64, error) {
+	if len(data) == 0 {
+		return 0, errors.New("bencode: tried to parse an integer from zero bytes")
+	}
 	isNegative := false
 	if data[0] == '-' {
 		data = data[1:]
